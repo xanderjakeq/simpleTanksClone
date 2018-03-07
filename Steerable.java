@@ -80,7 +80,7 @@ public class Steerable extends StdDrawableObject {
   }
   
   /** Turns if relevant key is pressed on keyboard. */
-  private void checkForTurn() {
+  public void checkForTurn() {
     if (StdDraw.isKeyPressed(keyCodeLeft))  { dir += turnDelta; }
     if (StdDraw.isKeyPressed(keyCodeRight)) { dir -= turnDelta; }
     // Note: Not an else-if so if both keys are down, they cancel
@@ -94,7 +94,7 @@ public class Steerable extends StdDrawableObject {
   }
   
   /** Wraps around to other side of world if hits a wall. */
-  private void handleWall() {
+  public void handleWall() {
     Point loc = getLocation();
     // Wrap around to other side
     if (loc.x() < 0) { setLocation(new Point(1, loc.y())); }

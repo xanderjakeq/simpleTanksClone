@@ -13,17 +13,19 @@ public class Tank extends Steerable{
 
     private int keyCodeBackward;
 
+    private int keyCodeShoot;
     //Costructors
     public Tank(Point loc, double radius,int bullets,
-                   int keyCodeLeft, int keyCodeRight,  int keyCodeForward, int keyCodeBackward){
+                   int keyCodeLeft, int keyCodeRight,  int keyCodeForward, int keyCodeBackward, int keyCodeShoot){
         super(loc, radius, keyCodeLeft, keyCodeRight);
         this.bullets = bullets;
         this.keyCodeForward = keyCodeForward;
         this.keyCodeBackward = keyCodeBackward;
+        this.keyCodeShoot = keyCodeShoot;
     }
 
     public Tank(Point loc, double radius){
-        this(loc, radius, 5, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
+        this(loc, radius, 5, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_NUMPAD0);
     }
 
     public Tank(){
@@ -50,9 +52,28 @@ public class Tank extends Steerable{
             setLocation(newLoc);
 
         }
-            
-            
-    } 
+    }
+    
+    /**
+     * Shoot Bullet and decrement bullet count
+     */
+    public void shoot(){
+        if(StdDraw.isKeyPressed(keyCodeShoot)){
+            Bullet shoot = new Bullet(this.getLocation(),this.getDir());
+            this.getWorld().add(shoot);
+        }
+    }
+
+    /**
+     * add shoot to step
+     */
+    public void step(){
+        checkForTurn();
+        moveForward();
+        shoot();
+        handleWall();
+    }
+
 
     public static void main(String[] args){
         StdWorld arena = new StdWorld();
