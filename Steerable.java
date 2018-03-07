@@ -57,6 +57,7 @@ public class Steerable extends StdDrawableObject {
   
   // Methods
   public double getDir() { return dir; }
+  public double getMoveDelta() { return moveDelta;}
   
   public void draw() {
     // TODO: Use an image (see BlackHole for example)
@@ -87,7 +88,7 @@ public class Steerable extends StdDrawableObject {
   }
   
   /** Moves forward in current direction. */
-  private void moveForward() {
+  public void moveForward() {
     Point newLoc = getLocation().translateAngleDist(dir, moveDelta);
     setLocation(newLoc);
   }
