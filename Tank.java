@@ -1,3 +1,4 @@
+
 import java.awt.event.KeyEvent;
 
 /**
@@ -28,7 +29,12 @@ public class Tank extends Steerable{
         this(loc, radius, 5, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_NUMPAD0);
     }
 
+    public Tank(int keyCodeLeft, int keyCodeRight,  int keyCodeForward, int keyCodeBackward, int keyCodeShoot){
+        this(Point.random(0,1), Math.random()*0.03, 5, keyCodeLeft, keyCodeRight, keyCodeForward,keyCodeBackward, keyCodeShoot);
+    }
+
     public Tank(){
+
         this(Point.random(0,1), Math.random()*0.03);
     }
 
@@ -80,8 +86,9 @@ public class Tank extends Steerable{
         arena.setClearBetweenSteps(true);
         Tank one = new Tank();
         Bullet boom = new Bullet(one.getLocation(), one.getDir());
+        Tank two = new Tank(KeyEvent.VK_A,KeyEvent.VK_D,KeyEvent.VK_W,KeyEvent.VK_S,KeyEvent.VK_SPACE);
 
-        arena.add(one,boom);
+        arena.add(one,two);
         arena.runTheWorld();
     }
 }

@@ -1,3 +1,4 @@
+import java.util.List;
 /**
  * be shot by the Tank
  */
@@ -14,7 +15,7 @@ public class Bullet extends BlackHole{
     }
 
     public Bullet(Point loc, double dir){
-        this(loc, .01, dir, .02 );
+        this(loc, .009, dir, .02 );
     }
 
     //Methodos
@@ -24,6 +25,16 @@ public class Bullet extends BlackHole{
     }
     public void step(){
         moveForward();
+        turn(Math.toRadians(1)); // degrees to rotate per frame
+            Point loc = getLocation();
+            List<StdDrawable> nearbyObjects =
+                getWorld().getObjectsNear(loc, this.getRadius());
+            for (StdDrawable o : nearbyObjects) {
+            if (o != this) { // Don't remove self!
+                getWorld().remove(o);
+                System.out.println(this + " absorbed " + o);
+            }
+            }
 
     }
 

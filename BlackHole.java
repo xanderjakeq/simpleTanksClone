@@ -27,6 +27,12 @@ public class BlackHole extends StdDrawableObject {
   
   // Methods
   /**
+   * Get bh radius
+   */
+  public double getRadius(){
+    return radius;
+  }
+  /**
    * Draws image of blackhole if possible, but falls back to
    * simpler black circle if unable to load image.
    */
