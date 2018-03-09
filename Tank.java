@@ -26,7 +26,7 @@ public class Tank extends Steerable{
     }
 
     public Tank(Point loc, double radius){
-        this(loc, radius, 5, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_NUMPAD0);
+        this(loc, radius, 5, KeyEvent.VK_LEFT, KeyEvent.VK_RIGHT, KeyEvent.VK_UP, KeyEvent.VK_DOWN, KeyEvent.VK_BACK_SLASH);
     }
 
     public Tank(int keyCodeLeft, int keyCodeRight,  int keyCodeForward, int keyCodeBackward, int keyCodeShoot){
@@ -87,8 +87,9 @@ public class Tank extends Steerable{
         Tank one = new Tank();
         Bullet boom = new Bullet(one.getLocation(), one.getDir());
         Tank two = new Tank(KeyEvent.VK_A,KeyEvent.VK_D,KeyEvent.VK_W,KeyEvent.VK_S,KeyEvent.VK_SPACE);
+        EnemyAi badone = new EnemyAi(one);
 
-        arena.add(one,two);
+        arena.add(one,two,badone);
         arena.runTheWorld();
     }
 }

@@ -15,7 +15,7 @@ public class Bullet extends BlackHole{
     }
 
     public Bullet(Point loc, double dir){
-        this(loc, .009, dir, .02 );
+        this(loc, .009, dir, .01 );
     }
 
     //Methodos
