@@ -6,6 +6,7 @@ public class EnemyAi extends Tank{
     private Tank target;
     private double dir;
     private double speed = .001;
+    private double anglediff;
 
     private boolean one = true;
     private boolean two = true;
@@ -33,9 +34,11 @@ public class EnemyAi extends Tank{
      */
     public void turnToTarget(){
         dir = getLocation().dirTo(target.getLocation());
+        //TODO: figure out why this does not work
          turnTo(dir);
         // System.out.println(direction);
-        System.out.println(getDir());
+        //System.out.println(getDir());
+        anglediff = Math.abs(this.getDir()-dir);
  
     }    
     public void moveForward(){
@@ -45,9 +48,10 @@ public class EnemyAi extends Tank{
     }
 
     public void shoot() {
+        if(this.getWorld().getObjects().contains(target)){
             Bullet bullet = new Bullet(this.getLocation(),this.getDir());
             this.getWorld().add(bullet);
-
+        }
     }
 
     public void step(){
@@ -62,7 +66,7 @@ public class EnemyAi extends Tank{
         }else{
             three = !three;
         }
-        if( one && two && three && target != null){
+        if( one && two && three && anglediff < .01){
             one = !one;
             two = !two;
             three = !three;
